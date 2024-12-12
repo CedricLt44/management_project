@@ -16,6 +16,7 @@ def todolist(request, project_id, pk):
     return render(request,"todolist/todolist.html", {
         'project': project,
         'todolist': todolist,
+        'previous_url': request.META.get('HTTP_REFERER', '/'),
     })
 
 

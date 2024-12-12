@@ -11,7 +11,7 @@
 
     <a href="{% url 'todolist:add' project.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
     <a href="{% url 'projet:edit' project.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
-    <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50"><p class="text-white text-center">SUPPRESION<br>PROJET</p></a>
+    <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
 
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for todolist in project.todolists.all %}
@@ -32,7 +32,7 @@
 
     <h2 class="mt-6 text-2xl"> LISTE DES DOCUMENTS </h2>
 
-    <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 text-white inline-block">Charger un document</a>
+    <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 rounded-2xl text-white inline-block">DOCUMENTS</a>
 
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for projectfile in project.files.all %}

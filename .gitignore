@@ -1,2 +1,6 @@
 /management_project/settings.py
 env/
+docker-compose.yml
+.env
+Dockerfile
+entrypoint.sh

@@ -1,6 +1,6 @@
 # MODULE PROJET #
-Ce module de mangement de projet fait partie de mon objectif de développer un erp complet et fonctionnel. j'ai commencer par ce module, car il est de niveau débutant et fait partie d'une longue liste de features.
-
+Ce module de mangement de projet fait partie de mon objectif de développer un erp complet et fonctionnel.
+J'ai commencer par ce module, car il est de niveau débutant et fait partie d'une longue liste de features.
 
 
 ### FRONTEND ###

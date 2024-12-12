@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <nav class="py-6 px-8 flex items-center justify-between p-4 bg-slate-700">
+      <h1 class="text-xl text-white"><a href='{% url "backend:index" %}'>PROJECT MANAGEMENT</a></h1>
+
+      <div class="space-x-4">
+        <a href="{% url 'backend:about' %}" class="text-white">About</a>
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'projet:projets' %}" class="py-4 px-8 bg-cyan-600 text-white">Projets</a>
+        {% else %}
+          <a href="{% url 'account:login' %}" class="py-4 px-8 bg-slate-600 text-white">Log in</a>
+          <a href="{% url 'account:signup' %}" class="py-4 px-8 bg-cyan-600 text-white">Sign up</a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <main class="py-6 px-8">
+      {% block content %}
+      {% endblock content %}
+    </main>
+    <footer class="fixed bottom-0 w-full flex justify-center items-center gap-4 py-6 px-8 bg-slate-900">
+      <p class="text-white">Copyright (c) 2024 - cedric LE TUTOUR</p>
+      <div class="flex justify-center items-center gap-4 mb-4"> 
+        <a href="https://www.linkedin.com/in/cedric-le-tutour" target="_blank" class="text-white flex hover:text-cyan-500 inline-block mt-4" aria-label="LinkedIn"><i class="bx bxl-linkedin text-3xl"></i></a>
+    
+        <a href="https://github.com/CedricLt44" target="_blank" class="text-white hover:text-cyan-500 inline-block mt-4" aria-label="GitHub"><i class='bx bxl-github text-3xl'></i></a>
+      </div>  
+    </footer>
+  </body>
+</html>

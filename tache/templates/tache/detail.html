@@ -1,0 +1,21 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+
+    <a href="{{ previous_url|default:'/' }}"><i class='bx bxs-left-arrow text-6xl text-teal-600'></i></a>   
+
+    <h1 class="mb-6 text-3xl">{{ task.name }}</h1>
+
+    <p><strong class='font-bold'>Statut :</strong> {% if task.is_done %}Terminé{% else %}A faire{% endif %}</p>
+
+    {% if task.description %}
+      <p class="mb-6">{{ task.description }}</p>
+    {% endif %}
+
+    {% if not task.is_done %}
+      <a href="?is_done=yes" class="py-4 px-8 bg-teal-600 text-white inline-block">TERMINER</a>
+    {% endif %}
+    <a href="{% url 'tache:edit' task.project_id task.todolist_id task.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">Editer</a>
+    <a href="{% url 'tache:delete' task.project_id task.todolist_id task.id %}" class="py-4 px-8 bg-rose-600 text-white inline-block">Supprimer</a>
+
+{% endblock %}

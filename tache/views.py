@@ -1,0 +1,71 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
+
+from todolist.models import Todolist
+from projet.models import Project
+from .models import Task
+# Create your views here.
+
+
+@login_required
+def add(request, project_id, todolist_id):
+    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name','')
+        description = request.POST.get('description', '')
+
+        Task.objects.create(project=project, todolist=todolist, name=name, description=description, created_by=request.user)
+
+        return redirect (f'/projets/{project_id}/{todolist_id}/')
+
+    return render(request, 'tache/add.html')
+
+
+@login_required
+def detail(request, project_id,todolist_id, pk):
+    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
+    task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
+
+    if request.GET.get ('is_done','') == 'yes':
+        task.is_done = True
+        task.save()
+
+    return render(request, 'tache/detail.html',{
+        'task':task,
+        'previous_url': request.META.get('HTTP_REFERER', '/')#retour page précédente
+    })
+
+@login_required
+def edit(request, project_id,todolist_id, pk):
+    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
+    task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
+
+    if request.method == 'POST':
+        name = request.POST.get('name','')
+        description = request.POST.get('description', '')
+
+        if name:
+            task.name = name
+
+        task.description = description
+        task.save()
+
+        return redirect (f'/projets/{project_id}/{todolist_id}/{pk}/')
+    
+    return render(request, 'tache/edit.html',{
+        'task':task
+    })
+
+@login_required
+def delete(request, project_id,todolist_id, pk):
+    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
+    task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
+    task.delete()
+
+    return redirect (f'/projets/{project_id}/{todolist_id}/')

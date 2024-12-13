@@ -11,6 +11,7 @@
             <div class="py-6 px-6 bg-slate-200">
                 <a href="{% url 'projet:projet' project.id %}">
                     <h2 class="mb-4 text-xl">{{ project.name }}</h2>
+                    <p> {{ project.created_at|date:"d/m/Y" }}</p>
 
                     <p class="text-sm text-slate-600">
                         {{ project.description }}

@@ -4,13 +4,15 @@
     <h1 class="mb-6 text-4xl">NOM DU PROJET: {{ project.name }}</h1>
 
     {% if project.description %}
-        <p class="mb-6">{{ project.description }}</p>
+    <p class="text-center text-xl mb-6">{{ project.description }}</p>
     {% endif %}
 
-    <h2 class="mt-6 mb-6 text-3xl"> LISTE DES TÂCHES </h2>
+    <h2 class="mt-6 mb-6 text-center text-3xl"> LISTE DES TÂCHES </h2>
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="{% url 'todolist:add' project.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
+        <a href="{% url 'projet:edit' project.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>        
+    </div>
 
-    <a href="{% url 'todolist:add' project.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
-    <a href="{% url 'projet:edit' project.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
     <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 mt-20 top-10 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
     <!-- Bouton pour voir les détails du projet -->
         
@@ -31,10 +33,11 @@
         {% endfor %}
     </div>
 
-    <h2 class="mt-6 text-2xl"> LISTE DES DOCUMENTS </h2>
-
-    <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 rounded-2xl text-white inline-block">DOCUMENTS</a>
-
+    <h2 class="mt-6 text-center text-2xl"> LISTE DES DOCUMENTS </h2>
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 rounded-2xl text-white inline-block">DOCUMENTS</a>
+    </div>
+    
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for projectfile in project.files.all %}
             <div class="py-6 px-6 bg-slate-200">
@@ -51,10 +54,11 @@
         {% endfor %}
     </div>
 
-    <h2 class="mt-6 text-2xl"> NOTES </h2>
-
-    <a href="{% url 'projet:add_note' project.id %}" class="mt-6 py-4 px-8 bg-slate-600 text-white inline-block">Ajoute Note</a>
-
+    <h2 class=" text-center mt-6 text-2xl"> LES NOTES DU PROJET </h2>
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="{% url 'projet:add_note' project.id %}" class="mt-6 py-4 px-8 bg-slate-600 rounded-2xl text-white inline-block">Ajoute Note</a>
+    </div>
+    
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for note in project.notes.all %}
             <div class="py-6 px-6 bg-slate-200">

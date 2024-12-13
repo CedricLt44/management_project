@@ -1,10 +1,11 @@
 {% extends 'backend/base.html' %}
 
 {% block content %}
-    <h1 class="mb-6 text-4xl"> MES PROJETS</h1>
-
-    <a href="{% url 'projet:add' %}" class="py-4 px-8 bg-sky-600 text-white inline-block">Ajouter projet</a>
-
+    <h1 class="text-center mb-6 text-4xl"> MES PROJETS</h1>
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="{% url 'projet:add' %}" class="py-4 px-8 bg-amber-600 text-white inline-block">Ajouter projet</a>
+    </div>
+    
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for project in projects %}
             <div class="py-6 px-6 bg-slate-200">

@@ -3,9 +3,9 @@
 {% block content %}
     <h1 class="mb-6 text-4xl">{{ note.name }}</h1>
 
-    <a href="{% url 'projet:note_edit' project.id note.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
-    <a href="{% url 'projet:note_delete' project.id note.id %}" class="py-4 px-8 bg-rose-600 text-white inline-block">SUPPRIMER</a>
-
+    <a href="{% url 'projet:note_edit' project.id note.id %}" class="mb-6 py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
+    <a href="{% url 'projet:note_delete' project.id note.id %}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DE LA NOTE</p></a>
+    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
     {% if note.body %}
         <p class="mb-6">{{ note.body }}</p>
     {% endif %}

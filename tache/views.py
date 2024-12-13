@@ -21,11 +21,14 @@ def add(request, project_id, todolist_id):
 
         return redirect (f'/projets/{project_id}/{todolist_id}/')
 
-    return render(request, 'tache/add.html')
+    return render(request, 'tache/add.html',{
+        'project': project,
+        'todolist': todolist,
+    })
 
 
 @login_required
-def detail(request, project_id,todolist_id, pk):
+def detail(request, project_id, todolist_id, pk):
     project = Project.objects.filter(created_by=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
     task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
@@ -36,7 +39,6 @@ def detail(request, project_id,todolist_id, pk):
 
     return render(request, 'tache/detail.html',{
         'task':task,
-        'previous_url': request.META.get('HTTP_REFERER', '/')#retour page précédente
     })
 
 @login_required

@@ -11,12 +11,10 @@ from tache.models import Task
 def todolist(request, project_id, pk):
     project = Project.objects.filter(created_by=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=pk)
-
-
+    
     return render(request,"todolist/todolist.html", {
         'project': project,
         'todolist': todolist,
-        'previous_url': request.META.get('HTTP_REFERER', '/'),
     })
 
 

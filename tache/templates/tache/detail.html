@@ -1,8 +1,8 @@
 {% extends 'backend/base.html' %}
 
 {% block content %}
-  <div class="flex justify-center min-h-screen">
-    <div class="mt-20">
+  <div class="flex justify-center">
+    <div class="mt-10">
       <h1 class="mb-6 text-3xl">{{ task.name }}</h1>
 
       <p><strong class='font-bold'>Statut :</strong> {% if task.is_done %}Terminé{% else %}A faire{% endif %}</p>
@@ -15,14 +15,8 @@
         <a href="?is_done=yes" class="py-4 px-8 bg-teal-600 text-white inline-block">TERMINER</a>
       {% endif %}
       <a href="{% url 'tache:edit' task.project_id task.todolist_id task.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">Editer</a>
-      <a href="{% url 'tache:delete' task.project_id task.todolist_id task.id %}" class="py-4 px-8 bg-rose-600 text-white inline-block">Supprimer</a>
-      <div class="mt-6">
-        <div class="flex justify-center">
-          <a href="{{ previous_url|default:'/' }}"><i class='mr-2 bx bxs-left-arrow text-6xl text-neutral-400'></i></a>
-          <p class="text-2xl mt-3 mr-10">RETOUR</p>
-        </div>
-        
-      </div>
+      <a href="{% url 'tache:delete' task.project_id task.todolist_id task.id %}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DE LA TACHE</p></a>
+      <a href="{% url 'todolist:todolist' task.project_id task.todolist_id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
     </div> 
   </div>
 {% endblock %}

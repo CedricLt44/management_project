@@ -3,6 +3,8 @@
 {% block content %}
     <h1 class="mb-6 text-3xl">Ajouter de document pour "{{ project.name }}"</h1>
 
+    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
+
     <form method="post" action="." enctype="multipart/form-data">
       {% csrf_token %}
 

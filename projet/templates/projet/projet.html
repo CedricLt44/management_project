@@ -12,7 +12,8 @@
     <a href="{% url 'todolist:add' project.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
     <a href="{% url 'projet:edit' project.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
     <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 mt-20 top-10 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
-
+    <!-- Bouton pour voir les détails du projet -->
+        
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for todolist in project.todolists.all %}
             <div class="py-6 px-6 bg-slate-200">
@@ -39,7 +40,7 @@
             <div class="py-6 px-6 bg-slate-200">
                 <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
 
-                <a href="{{ projectfile.attachment.url }}" target="_blank" class="text-sm text-slate-600">
+                <a href="{{ projectfile.attachment.url }}" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600">
                     Download file
                 </a>
                 |

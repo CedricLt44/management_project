@@ -12,7 +12,7 @@ RUN apt-get update \
 # Créer le répertoire et définir le workdir en une seule étape
 WORKDIR /app
 
-# Configurer l'environnement virtuel et installer les dépendances
+# Configurer l'environnement virtuel et installer les dépendancesd
 COPY requirements.txt .
 RUN python -m venv /env \
     && /env/bin/pip install --upgrade pip \

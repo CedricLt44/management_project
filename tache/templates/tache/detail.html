@@ -2,22 +2,23 @@
 
 {% block content %}
   <div class="flex justify-center">
-    <div class="mt-10">
+    <div class="mt-10 mx-auto max-w-lg">
       <h1 class="mb-6 text-3xl">{{ task.name }}</h1>
-      <p> Commencer le :{{ task.created_at|date:"d/m/Y" }}</p>
+      <p class="mb-4"> Commencer le :{{ task.created_at|date:"d/m/Y" }}</p>
+      <a href="{% url 'tache:delete' task.project_id task.todolist_id task.id %}"><i onclick="return confirm('êtes-vous sur de vouloir supprimer cette tâche')"class='bx bxs-trash text-rose-500 text-2xl'></i></a>
 
-      <p><strong class='font-bold'>Statut :</strong> {% if task.is_done %}Terminé{% else %}A faire{% endif %}</p>
+      <p class="mb-4 mt-4"><strong>Statut :</strong> {% if task.is_done %}Terminé{% else %}A faire{% endif %}</p>
 
       {% if task.description %}
         <p class="mb-6">{{ task.description }}</p>
       {% endif %}
 
       {% if not task.is_done %}
-        <a href="?is_done=yes" class="py-4 px-8 bg-teal-600 text-white inline-block">TERMINER</a>
+        <a href="?is_done=yes" class="rounded-lg py-4 px-8 hover:bg-teal-800 bg-teal-700 text-white inline-block">TERMINER</a>
       {% endif %}
-      <a href="{% url 'tache:edit' task.project_id task.todolist_id task.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">Editer</a>
-      <a href="{% url 'tache:delete' task.project_id task.todolist_id task.id %}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DE LA TACHE</p></a>
-      <a href="{% url 'todolist:todolist' task.project_id task.todolist_id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
+      <a href="{% url 'tache:edit' task.project_id task.todolist_id task.id %}" class="rounded-lg py-4 px-8 hover:bg-amber-800 bg-amber-600 text-white inline-block">Editer</a>
+      
     </div> 
   </div>
+  <a href="{% url 'todolist:todolist' task.project_id task.todolist_id %}" class="flex absolute right-8 bottom-7 py-4 px-8 hover:bg-cyan-800 bg-cyan-700 text-white z-50 rounded-2xl">RETOUR</a>
 {% endblock %}

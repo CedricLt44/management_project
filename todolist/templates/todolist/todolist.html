@@ -2,7 +2,14 @@
 
 {% block content %}
     <h1 class="mb-6 text-1xl">ATTACHE AU PROJET : {{ project.name }}</h1>
-    <h1 class="mb-6 text-4xl">{{ todolist.name }}</h1>
+    
+    <div class="flex space-y-2 space-x-6 ">
+
+        <h1 class="mb-6 text-4xl">{{ todolist.name }}</h1>
+
+        <a href="{% url 'todolist:delete' project.id todolist.id%}"><i onclick="return confirm('êtes-vous sur de vouloir supprimer cette liste')" class='bx bxs-trash text-center text-rose-500 text-2xl inline-block right-8'></i></a>   
+    </div>
+
 
     {% if todolist.description %}
       <p class="mb-6">{{ todolist.description }}</p>
@@ -11,9 +18,10 @@
     <h1 class="mb-6 mt-6 text-4xl">LISTE DES TACHES</h1>
 
     <a href="{% url 'tache:add' project.id todolist.id %}" class="rounded-lg hover:bg-teal-700 py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
+
     <a href="{% url 'todolist:edit' project.id todolist.id %}" class="rounded-lg hover:bg-cyan-700 py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
-    <a href="{% url 'todolist:delete' project.id todolist.id%}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-lg hover:bg-rose-700"><p class="text-white text-center">SUPPRESION<br>DE LA LISTE</p></a>
-    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-cyan-700">RETOUR</a>
+
+    <a href="{% url 'projet:projet' project.id %}" class="flex absolute right-8 bottom-8 py-4 px-8 bg-cyan-700 text-white z-50 rounded-lg hover:bg-cyan-800">RETOUR</a>
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for task in todolist.tasks.all %}
             <div class="group rounded-lg shadow-lg space-y-3 hover:bg-slate-500 relative py-6 px-6 bg-slate-200">
@@ -29,7 +37,7 @@
                     <!-- Icône conditionnelle pour l'état de la tâche -->
                     {% if task.is_done %}
                         <i class="bx bxs-check-circle text-teal-500 text-2xl" title="Tâche terminée"></i>
-                        <i class=''></i>
+                        
                     {% else %}
                         <i class="bx bxs-x-circle text-rose-500 text-2xl" title="Tâche non terminée"></i>
                         

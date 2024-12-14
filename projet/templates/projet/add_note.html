@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="mb-6 text-3xl">Ajouter une note</h1>
     
-    <form class="mt-6 space-y-4" method="post" action=".">
+    <form class="max-w-lg mx-auto mt-6 space-y-4" method="post" action=".">
       {% csrf_token %}
 
       <div>
@@ -13,13 +13,13 @@
 
       <div>
         <label class="text-slate-800">Contexte</label><br>
-        <textarea name="body" class="w-full py-4 px-6 bg-slate-400 text-white" rows="20"></textarea>
+        <textarea name="body" class="w-full py-4 px-6 bg-slate-400 text-white" rows="15"></textarea>
       </div>
 
       <div>
-        <button class="py-4 px-8 bg-cyan-600 text-white">Ajouter</button>
+        <button class="py-4 px-8 bg-neutral-600 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-neutral-700">Ajouter</button>
       </div>
 
     </form>
-
+    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block right-9 bottom-9 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-cyan-700">RETOUR</a>
 {% endblock %}

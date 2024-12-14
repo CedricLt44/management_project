@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.urls')),
@@ -27,4 +28,4 @@ urlpatterns = [
     path('projets/',include('projet.urls')),
     path('projets/<uuid:project_id>/',include('todolist.urls')),
     path('projets/<uuid:project_id>/<uuid:todolist_id>/',include('tache.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

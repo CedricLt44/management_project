@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="mb-6 text-3xl">Ajouter une tâche</h1>
     
-    <form class="mt-6 space-y-4" method="post" action=".">
+    <form class="mt-10 max-w-screen-lg mx-auto space-y-4" method="post" action=".">
       {% csrf_token %}
 
       <div>
@@ -17,10 +17,12 @@
       </div>
 
       <div>
-        <button class="py-4 px-8 bg-cyan-600 text-white">AJOUTER</button>
-        <a href="{% url 'todolist:todolist' project_id=project.id pk=todolist.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 z-50 rounded-2xl text-white">RETOUR</a>
+        <button class="py-4 px-8 rounded-lg hover:bg-neutral-800 bg-neutral-600 text-white">AJOUTER</button>
+        
       </div>
 
     </form>
+
+    <a href="{% url 'todolist:todolist' project_id=project.id pk=todolist.id %}" class="flex absolute inline-block right-9 bottom-9 py-4 px-8 bg-cyan-700 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-cyan-800">RETOUR</a>
 
 {% endblock %}

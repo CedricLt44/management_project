@@ -1,10 +1,10 @@
 {% extends 'backend/base.html' %}
 
 {% block content %}
-<div class="max-w-xl mx-auto py-8 bg-slate-800 text-center">
+<div class="max-w-xl mx-auto py-8 bg-slate-800 text-center rounded-lg shadow-xl space-y-3">
     <h1 class="text-3xl text-white">Log in</h1>
 
-    <form class="mt-6 px-8 space-y-4" method="post" action=".">
+    <form class="mt-6 px-9 space-y-4" method="post" action=".">
         {% csrf_token %}
 
         <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div>
-            <button class="py-4 px-8 bg-sky-600 text-white">Log in</button>
+            <button class="py-4 px-8 bg-sky-600 hover:bg-sky-700 rounded-lg text-white">Log in</button>
         </div>
     </form>
 </div>

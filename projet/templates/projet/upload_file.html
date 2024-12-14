@@ -3,37 +3,49 @@
 {% block content %}
     <h1 class="mb-6 text-3xl">Ajouter de document pour "{{ project.name }}"</h1>
 
-    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
-
-    <form method="post" action="." enctype="multipart/form-data">
-      {% csrf_token %}
-
-      {{ form.as_p }}
-
-      <div class="mt-6">
-        <button class="py-4 px-8 bg-amber-600 text-white">LOAD</button>
-      </div>
-
-    </form>
-
     <h2 class="mt-6 text-2xl"> LISTE DES DOCUMENTS </h2>
-
     
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for projectfile in project.files.all %}
             <div class="py-6 px-6 bg-slate-200">
                 <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
 
-                <a href="{{ projectfile.attachment.url }}" target="_blank" class="text-sm text-slate-600">
+                <a href="{{ projectfile.attachment.url }}" target="_blank" class="hover:text-slate-900 text-sm text-slate-600">
                     Download file
                 </a>
                 |
-                <a href="{% url 'projet:delete_file' project.id projectfile.id %}" class="text-sm text-slate-600">
+                <a href="{% url 'projet:delete_file' project.id projectfile.id %}" class="hover:text-slate-900 text-sm text-slate-600">
                     Delete
                 </a>
             </div>
         {% endfor %}
     </div>
+
+
+   
+    <form class="max-w-lg mx-auto mt-10" method="post" action="." enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="space-y-4">
+
+        {% for field in form %}
+        <div class="flex flex-col">
+          <label for="{{ field.id_for_label }}" class="mb-2">{{ field.label }}</label>
+          <div class="border-2 p-2 rounded-md">
+            {{ field }}
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <div class="mt-6">
+        <button class="py-4 px-8 rounded-lg hover:bg-amber-700 bg-amber-600 text-white">LOAD</button>
+      </div>
+
+    </form>
+
+     <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block right-9 bottom-9 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-cyan-700">RETOUR</a>
 
 {% endblock %}
 

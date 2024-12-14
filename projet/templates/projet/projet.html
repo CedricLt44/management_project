@@ -2,6 +2,10 @@
 
 {% block content %}
     <h1 class="mb-6 text-4xl">NOM DU PROJET: {{ project.name }}</h1>
+    <a href="{% url 'projet:delete' project.id %}">
+    <i onclick="return confirm('êtes-vous sur de vouloir supprimer ce projet')" class='bx bxs-trash text-center text-rose-500 text-2xl mb-6 inline-block right-8'>
+            </i></a>
+
     <p>Projet commencer le :{{ project.created_at|date:"d/m/Y" }}</p>
     {% if project.description %}
     <p class="text-center text-xl mb-6">{{ project.description }}</p>
@@ -13,7 +17,7 @@
         <a href="{% url 'projet:edit' project.id %}" class="rounded-lg py-4 px-8 bg-cyan-600 hover:bg-cyan-700 text-white inline-block">EDITER</a>        
     </div>
 
-    <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 mt-20 top-10 py-4 px-8 bg-rose-600 z-50 hover:bg-rose-700 rounded-lg"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
+    
     <!-- Bouton pour voir les détails du projet -->
         
     <div class="mt-6 grid grid-cols-4 gap-4">
@@ -40,14 +44,14 @@
     
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for projectfile in project.files.all %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="rounded-lg shadow-lg space-y-3 py-6 px-6 bg-slate-200">
                 <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
 
-                <a href="{{ projectfile.attachment.url }}" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600">
+                <a href="{{ projectfile.attachment.url }}" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600 hover:text-slate-900">
                     Download file
                 </a>
                 |
-                <a href="{% url 'projet:delete_file' project.id projectfile.id %}" class="text-sm text-slate-600">
+                <a href="{% url 'projet:delete_file' project.id projectfile.id %}" class="text-sm text-slate-600 hover:text-slate-900">
                     Delete
                 </a>
             </div>
@@ -56,16 +60,16 @@
 
     <h2 class=" text-center mt-6 text-2xl"> LES NOTES DU PROJET </h2>
     <div class="flex flex-wrap gap-4 justify-center">
-        <a href="{% url 'projet:add_note' project.id %}" class="mt-6 py-4 px-8 bg-slate-600 hover:bg-slate-700 rounded-lg text-white inline-block">Ajoute Note</a>
+        <a href="{% url 'projet:add_note' project.id %}" class=" mt-4 py-4 px-8 bg-slate-500 hover:bg-slate-700 rounded-lg text-white inline-block">Ajoute Note</a>
     </div>
     
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for note in project.notes.all %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="group hover:bg-slate-500 py-6 px-6 bg-slate-300">
                 <a href="{% url 'projet:note_detail' project.id note.id %}">
-                    <h3 class="mb-4 text-xl">{{ note.name }}</h3>
+                    <h3 class="mb-4 group-hover:text-white text-xl">{{ note.name }}</h3>
 
-                    <p class="text-sm text-slate-600">
+                    <p class="text-sm text-slate-900 group-hover:text-white">
                         {{ note.body|truncatechars:50 }}
                     </p>
                 </a>

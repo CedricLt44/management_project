@@ -1,7 +1,7 @@
 {% extends 'backend/base.html' %}
 
 {% block content %}
-<div class="max-w-xl mx-auto py-8 bg-slate-800 text-center">
+<div class="max-w-xl mx-auto py-8 bg-slate-800 text-center rounded-lg shadow-xl space-y-3">
   <h1 class="text-3xl text-white">Sign Up</h1>
   <form class="px-8 mt-6 space-y-4" method="post" action=".">
     {% csrf_token %}
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-      <button class="py-4 px-8 bg-cyan-600 text-white">Sign Up</button>
+      <button class="py-4 px-8 bg-sky-600 hover:bg-sky-700 rounded-lg text-white">Sign Up</button>
     </div>
   
   </form>

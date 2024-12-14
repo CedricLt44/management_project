@@ -4,7 +4,7 @@
   <div class="flex justify-center">
     <div class="mt-10">
       <h1 class="mb-6 text-3xl">{{ task.name }}</h1>
-      <p> {{Commencer le task.created_at|date:"d/m/Y" }}</p>
+      <p> Commencer le :{{ task.created_at|date:"d/m/Y" }}</p>
 
       <p><strong class='font-bold'>Statut :</strong> {% if task.is_done %}Terminé{% else %}A faire{% endif %}</p>
 

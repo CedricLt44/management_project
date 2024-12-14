@@ -3,13 +3,17 @@
 {% block content %}
     <h1 class="mb-6 text-4xl">NOM DU PROJET: {{ project.name }}</h1>
     <a href="{% url 'projet:delete' project.id %}">
-    <i onclick="return confirm('êtes-vous sur de vouloir supprimer ce projet')" class='bx bxs-trash text-center text-rose-500 text-2xl mb-6 inline-block right-8'>
-            </i></a>
+    <i onclick="return confirm('êtes-vous sur de vouloir supprimer ce projet')" class='bx bxs-trash text-center text-rose-500 text-2xl mb-6 inline-block right-8'></i></a>
 
     <p>Projet commencer le :{{ project.created_at|date:"d/m/Y" }}</p>
+
     {% if project.description %}
     <p class="text-center text-xl mb-6">{{ project.description }}</p>
     {% endif %}
+
+    <div class="flex flex-wrap gap-4 justify-center">
+        <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 hover:bg-amber-700 rounded-lg text-white inline-block">FICHIERS</a>
+    </div>
 
     <h2 class="mt-6 mb-6 text-center text-3xl"> LISTE DES TÂCHES </h2>
     <div class="flex flex-wrap gap-4 justify-center">
@@ -32,27 +36,6 @@
                     <div class="group-hover:text-white mt-4 text-sm text-gray-600">
                         <span class="font-semibold">Tâches terminées :</span> {{ todolist.completed_tasks_count }} / {{ todolist.total_tasks_count }}
                     </div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-
-    <h2 class="mt-6 text-center text-2xl"> LISTE DES DOCUMENTS </h2>
-    <div class="flex flex-wrap gap-4 justify-center">
-        <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 hover:bg-amber-700 rounded-lg text-white inline-block">DOCUMENTS</a>
-    </div>
-    
-    <div class="mt-6 grid grid-cols-4 gap-4">
-        {% for projectfile in project.files.all %}
-            <div class="rounded-lg shadow-lg space-y-3 py-6 px-6 bg-slate-200">
-                <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
-
-                <a href="{{ projectfile.attachment.url }}" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600 hover:text-slate-900">
-                    Download file
-                </a>
-                |
-                <a href="{% url 'projet:delete_file' project.id projectfile.id %}" class="text-sm text-slate-600 hover:text-slate-900">
-                    Delete
                 </a>
             </div>
         {% endfor %}

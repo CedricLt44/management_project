@@ -9,23 +9,23 @@
 
     <h2 class="mt-6 mb-6 text-center text-3xl"> LISTE DES TÂCHES </h2>
     <div class="flex flex-wrap gap-4 justify-center">
-        <a href="{% url 'todolist:add' project.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
-        <a href="{% url 'projet:edit' project.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>        
+        <a href="{% url 'todolist:add' project.id %}" class="rounded-lg py-4 px-8 bg-teal-600 hover:bg-teal-700 text-white inline-block">AJOUTER</a>
+        <a href="{% url 'projet:edit' project.id %}" class="rounded-lg py-4 px-8 bg-cyan-600 hover:bg-cyan-700 text-white inline-block">EDITER</a>        
     </div>
 
-    <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 mt-20 top-10 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
+    <a href="{% url 'projet:delete' project.id %}" class="flex absolute inline-block right-8 mt-20 top-10 py-4 px-8 bg-rose-600 z-50 hover:bg-rose-700 rounded-lg"><p class="text-white text-center">SUPPRESION<br>DU PROJET</p></a>
     <!-- Bouton pour voir les détails du projet -->
         
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for todolist in project.todolists.all %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="group rounded-lg shadow-lg space-y-3 hover:bg-slate-500 py-6 px-6 bg-slate-200">
                 <a href="{% url 'todolist:todolist' project.id todolist.id %}">
-                    <h3 class="mb-4 text-xl">{{ todolist.name }}</h3>
-                    <p>Commencer le {{ todolist.created_at|date:"d/m/Y" }}</p>
-                    <p class="text-sm text-slate-600">
+                    <h3 class="group-hover:text-white mb-4 text-xl">{{ todolist.name }}</h3>
+                    <p class="group-hover:text-white">Commencer le {{ todolist.created_at|date:"d/m/Y" }}</p>
+                    <p class="group-hover:text-white text-sm text-slate-600">
                         {{ todolist.description }}
                     </p>
-                    <div class="mt-4 text-sm text-gray-600">
+                    <div class="group-hover:text-white mt-4 text-sm text-gray-600">
                         <span class="font-semibold">Tâches terminées :</span> {{ todolist.completed_tasks_count }} / {{ todolist.total_tasks_count }}
                     </div>
                 </a>
@@ -35,7 +35,7 @@
 
     <h2 class="mt-6 text-center text-2xl"> LISTE DES DOCUMENTS </h2>
     <div class="flex flex-wrap gap-4 justify-center">
-        <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 rounded-2xl text-white inline-block">DOCUMENTS</a>
+        <a href="{% url 'projet:upload_file' project.id %}" class="mt-6 py-4 px-8 bg-amber-600 hover:bg-amber-700 rounded-lg text-white inline-block">DOCUMENTS</a>
     </div>
     
     <div class="mt-6 grid grid-cols-4 gap-4">
@@ -56,7 +56,7 @@
 
     <h2 class=" text-center mt-6 text-2xl"> LES NOTES DU PROJET </h2>
     <div class="flex flex-wrap gap-4 justify-center">
-        <a href="{% url 'projet:add_note' project.id %}" class="mt-6 py-4 px-8 bg-slate-600 rounded-2xl text-white inline-block">Ajoute Note</a>
+        <a href="{% url 'projet:add_note' project.id %}" class="mt-6 py-4 px-8 bg-slate-600 hover:bg-slate-700 rounded-lg text-white inline-block">Ajoute Note</a>
     </div>
     
     <div class="mt-6 grid grid-cols-4 gap-4">

@@ -10,18 +10,18 @@
 
     <h1 class="mb-6 mt-6 text-4xl">LISTE DES TACHES</h1>
 
-    <a href="{% url 'tache:add' project.id todolist.id %}" class="py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
-    <a href="{% url 'todolist:edit' project.id todolist.id %}" class="py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
-    <a href="{% url 'todolist:delete' project.id todolist.id%}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-2xl"><p class="text-white text-center">SUPPRESION<br>DE LA LISTE</p></a>
-    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block">RETOUR</a>
+    <a href="{% url 'tache:add' project.id todolist.id %}" class="rounded-lg hover:bg-teal-700 py-4 px-8 bg-teal-600 text-white inline-block">AJOUTER</a>
+    <a href="{% url 'todolist:edit' project.id todolist.id %}" class="rounded-lg hover:bg-cyan-700 py-4 px-8 bg-cyan-600 text-white inline-block">EDITER</a>
+    <a href="{% url 'todolist:delete' project.id todolist.id%}" class="flex absolute inline-block right-8 bottom-5 py-4 px-8 bg-rose-600 z-50 rounded-lg hover:bg-rose-700"><p class="text-white text-center">SUPPRESION<br>DE LA LISTE</p></a>
+    <a href="{% url 'projet:projet' project.id %}" class="flex absolute inline-block left-8 bottom-5 py-4 px-8 bg-cyan-600 text-white z-50 rounded-2xl inline-block rounded-lg hover:bg-cyan-700">RETOUR</a>
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for task in todolist.tasks.all %}
-            <div class=" relative py-6 px-6 bg-slate-200">
+            <div class="group rounded-lg shadow-lg space-y-3 hover:bg-slate-500 relative py-6 px-6 bg-slate-200">
                 <a href="{% url 'tache:detail' todolist.project.id todolist.id task.id %}">
-                    <h2 class="mb-4 text-xl">{{ task.name }}</h2>
-                    <p>Commencer le {{ task.created_at|date:"d/m/Y" }}</p>
+                    <h2 class="group-hover:text-white mb-4 text-xl">{{ task.name }}</h2>
+                    <p class="group-hover:text-white">Commencer le {{ task.created_at|date:"d/m/Y" }}</p>
 
-                    <p class="text-sm text-slate-600">
+                    <p class="group-hover:text-white text-sm text-slate-600">
                         {{ task.description }}
                     </p>
                 </a>

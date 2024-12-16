@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls.static import static
+
 from django.contrib import admin
 from django.urls import path, include
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.urls')),
     path('',include('account.urls')),
+    path('gestion_client/', include('gestion_client.urls')),
     path('projets/',include('projet.urls')),
     path('projets/<uuid:project_id>/',include('todolist.urls')),
     path('projets/<uuid:project_id>/<uuid:todolist_id>/',include('tache.urls')),

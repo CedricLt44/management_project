@@ -2,6 +2,10 @@
 
 {% block content %}
   <header class="py-12 text-center bg-neutral-200">
-    <h1 class="text-3xl">Bienvenue !</h1>
+    {% if request.user.is_authenticated %}
+    <h1 class="text-3xl">Bienvenue {{ user.name }} !</h1>
+    {% else %}
+      <h1 class="text-3xl">Bienvenue !</h1>
+    {% endif %}
   </header>
   {% endblock content %}

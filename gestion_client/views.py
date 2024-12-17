@@ -1,21 +1,28 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Customer, Invoice
+from projet.models import Project
 
 # Définition de la vue pour afficher les clients
 @login_required
 def customers(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.filter(created_by=request.user)
+    for customer in customers:
+        customer.project_count = Project.objects.filter(customer=customer).count()
+
     return render(request, 'gestion_client/gestion_client.html', {
         'customers': customers
     })
 
 @login_required
 def customer(request, id):
-        
+    
     customer = Customer.objects.get( id=id,)
+    projects = Project.objects.filter(customer=customer, created_by=request.user)
+
     return render(request, 'gestion_client/client.html', {
-        'customer': customer
+        'customer': customer,
+        'projects': projects
     })
 # Définition de la vue pour ajouter un client
 @login_required

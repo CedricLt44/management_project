@@ -12,6 +12,16 @@
       </div>
 
       <div>
+        <label class="text-slate-800">Client</label><br>
+        <select name="customer" class="w-full py-4 px-6 bg-slate-400 text-white">
+            <option value="" disabled selected>Choisissez un client</option>
+            {% for customer in customers %}
+                <option value="{{ customer.id }}">{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+      </div>
+
+      <div>
         <label class="text-slate-800">Description</label><br>
         <textarea name="description" class="w-full py-4 px-6 bg-slate-400 text-white"></textarea>
       </div>

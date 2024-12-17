@@ -2,4 +2,25 @@
 
 {% block content %}
   <h1>GESTION CLIENTS</h1>
+  <div class="flex flex-wrap gap-4 justify-center">
+    <a href="{% url 'gestion_client:add' %}" class="rounded-lg py-4 px-8 bg-amber-600 hover:bg-amber-700 text-white inline-block">Ajouter client</a>
+  </div>
+
+  <div class="mt-6 grid grid-cols-4 gap-4">
+    {% for customer in customers %}
+        <div class="group rounded-lg shadow-lg space-y-3 py-6 px-6 bg-slate-200 hover:bg-slate-500">
+            <a href="{% url 'gestion_client:client' customer.id %}">
+                <h2 class="group-hover:text-white mb-4 text-xl">{{ customer.name }}</h2>
+                <p class="group-hover:text-white"> {{ customer.created_at|date:"d/m/Y" }}</p>
+
+                <p class="group-hover:text-white text-sm text-slate-600">
+                    {{ customer.address }} "{{ customer.zip_code }}", {{ customer.city }}
+                </p>
+            </a>
+        </div>
+    {% empty %}
+        <p>Aucun client trouvé.</p>
+    {% endfor %}
+  </div>
+
 {% endblock %}

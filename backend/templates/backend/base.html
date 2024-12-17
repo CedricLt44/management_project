@@ -14,7 +14,7 @@
         
         {% if request.user.is_authenticated %}
         <a href="{% url 'projet:projets' %}" class="rounded-lg hover:bg-cyan-700 py-2 px-4 bg-cyan-600 text-white">Projets</a>
-        <a href="{% url 'gestion_client:gestion_client' %}" class="rounded-lg hover:bg-rose-700 py-2 px-4 bg-rose-600 text-white">Clients</a>
+        <a href="{% url 'gestion_client:customers' %}" class="rounded-lg hover:bg-rose-700 py-2 px-4 bg-rose-600 text-white">Clients</a>
         {% else %}
           <a href="{% url 'account:login' %}" class="py-2 px-4 bg-slate-600 hover:bg-slate-800 text-white rounded-lg">Log in</a>
           <a href="{% url 'account:signup' %}" class="py-2 px-4 bg-cyan-600 hover:bg-cyan-800 text-white rounded-lg">Sign up</a>        

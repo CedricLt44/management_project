@@ -5,5 +5,7 @@ from . import views
 app_name = 'gestion_client'
 
 urlpatterns = [
-  path('' ,views.gestion_client, name='gestion_client'),
-  ]
+    path('', views.customers, name='customers'),
+    path('add/', views.add, name='add'),
+    path('<int:id>/', views.customer, name='client'),  # Vue pour afficher un client spécifique
+]

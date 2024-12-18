@@ -4,9 +4,10 @@ from .models import Customer, Invoice
 from projet.models import Project
 
 # Définition de la vue pour afficher les clients
-@login_required
+# @login_required
 def customers(request):
-    customers = Customer.objects.filter(created_by=request.user)
+    customers = Customer.objects.all()
+    # customers = Customer.objects.filter(created_by=request.user)
     for customer in customers:
         customer.project_count = Project.objects.filter(customer=customer).count()
 
@@ -14,7 +15,7 @@ def customers(request):
         'customers': customers
     })
 
-@login_required
+# @login_required
 def customer(request, id):
     
     customer = Customer.objects.get( id=id,)

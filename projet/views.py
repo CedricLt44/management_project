@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 from .forms import ProjectFileForm
 from .models import Project, ProjectNote
-from .models import Customer
+from gestion_client.models import Customer, Invoice
 
 # Create your views here.
 @login_required
@@ -52,22 +52,46 @@ def edit(request, pk):
   project = Project.objects.filter(created_by=request.user).get(pk=pk)
   customers = Customer.objects.filter(created_by=request.user)
 
+  invoice = Invoice.objects.filter(customer=project.customer, total=project.price).first()
+
+
   if request.method == 'POST':
-      name = request.POST.get('name', '')
-      description = request.POST.get('description', '')
-      customer_id = request.POST.get('customer', '')
+    name = request.POST.get('name', '')
+    description = request.POST.get('description', '')
+    customer_id = request.POST.get('customer', '')
+    price =request.POST.get('price', None)
+    invoice_comment = request.POST.get('invoice_comment', '')
 
-      if name:
-         project.name = name
-         project.description = description
-         project.customer = Customer.objects.get(id=customer_id)
-         project.save()
+    if name:
+        project.name = name
+        project.description = description
+        project.customer = Customer.objects.get(id=customer_id)
 
-         return redirect('/projets/')
+        
+        if price is not None :
+            project.price = price
+            project.save()
+            
+            if invoice:
+                invoice.comment = invoice_comment 
+                invoice.total =price
+                invoice.save()
+            else:
+                invoice = Invoice(
+                customer=project.customer,
+                created_by=request.user,
+                total=project.price,
+                invoice_type='P',
+                comment=invoice_comment
+                )
+                invoice.save()
+
+            return redirect('/projets/')
       
   return render(request, 'projet/edit.html', {
         'project': project,
-        'customers': customers
+        'customers': customers,
+        'invoice': invoice
     })
 
 @login_required

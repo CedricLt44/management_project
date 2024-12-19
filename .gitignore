@@ -5,3 +5,9 @@ docker-compose.yml
 Dockerfile
 entrypoint.sh
 gestion_client/
+# Fichiers Python
+*.pyc
+__pycache__/
+.gitignore
+media/
+static/

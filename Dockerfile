@@ -1,11 +1,15 @@
-FROM python:3.12
+FROM python:3.12.12-slim
 
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+
+# Variables d'environnement pour un comportement cohérent
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    VIRTUAL_ENV=/env \
+    PATH="/env/bin:$PATH"
 
 # Combiner les installations système
 RUN apt-get update \
-    && apt-get install -y postgresql-client \
+    && apt-get install -y --no-install-recommends postgresql-client \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -14,6 +18,7 @@ WORKDIR /app
 
 # Configurer l'environnement virtuel et installer les dépendancesd
 COPY requirements.txt .
+
 RUN python -m venv /env \
     && /env/bin/pip install --upgrade pip \
     && /env/bin/pip install -r requirements.txt
